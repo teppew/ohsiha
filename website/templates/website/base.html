@@ -2,8 +2,6 @@
 
 <!DOCTYPE html>
 <html>
-
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,10 +16,7 @@
     <title> Django project</title>
 </head>
 
-
-
 <body>
-
     <!-- Navigation panels -->
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
@@ -34,7 +29,8 @@
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'website-home' %}">Home</a>
               <a class="nav-item nav-link" href="{% url 'website-about' %}">About</a>
-              <a class="nav-item nav-link" href="https://www.google.com/search?q=pepe+the+frog+memes&sxsrf=ALeKk03O7K_tPXy2PrqR3x3HmmbkYhU0sQ:1582216219215&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjE2NDdxuDnAhWiyqYKHYubAUkQ_AUoAXoECAsQAw&biw=1479&bih=1306">Apustaja memes</a>
+              <a class="nav-item nav-link" href="https://www.google.com/search?q=pepe+the+frog+memes&sxsrf=ALeKk03O7K_tPXy2PrqR3x3HmmbkYhU0sQ:15822
+                                                    16219215&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjE2NDdxuDnAhWiyqYKHYubAUkQ_AUoAXoECAsQAw&biw=1479&bih=1306">Apustaja memes</a>
             </div>
 
             <!-- Navbar Right Side -->
@@ -55,24 +51,21 @@
       </nav>
     </header>
 
-    <!-- Content block -->
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
+            {% block content %}
 
-            {% block content %}{% endblock %}
+
+            {% endblock %}
         </div>
+
+      <!-- THIS IS THE RIGHT BOX IN THE HOME PAGE -->
+        <!--
         <div class="col-md-4">
           <div class="content-section">
             <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
+            <p class='text-muted'>Information
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light">Latest Posts</li>
                 <li class="list-group-item list-group-item-light">Announcements</li>
@@ -82,6 +75,8 @@
             </p>
           </div>
         </div>
+      -->
+
       </div>
     </main>
 
