@@ -4,6 +4,15 @@
 {%  block content %}
     <html>
     <head>
+        <style>
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 500px;  /* The height is 400 pixels */
+                width: 800px;  /* The width is the width of the web page */
+            }
+        </style>
+
+
         <!--Load the AJAX API-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
@@ -12,58 +21,128 @@
             google.charts.load('current', {'packages':['corechart']});
 
             // Set a callback to run when the Google Visualization API is loaded.
-            google.charts.setOnLoadCallback(drawChart);
+            google.charts.setOnLoadCallback(drawChart_polarity);
 
             // Callback that creates and populates a data table,
             // instantiates the pie chart, passes in the data and
             // draws it.
-            function drawChart() {
+
+            function drawChart_polarity() {
 
                 // Create the data table.
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Topping');
-                data.addColumn('number', 'Slices');
+                data.addColumn('string', 'xxx');
+                data.addColumn('number', 'xxx');
+
                 data.addRows([
-                    ['Positive', {{ polaritys.0 }}],
-                    ['Negative', {{ polaritys.1 }}],
-                    ['Neutral', {{ polaritys.2 }}],
+                    ['Positive', {{ sentiments.0 }}],
+                    ['Negative', {{ sentiments.1 }}],
+                    ['Neutral', {{ sentiments.2 }}],
                 ]);
 
                 // Set chart options
-                var options = {'width':800, 'height':500};
+                var options = {'width':800, 'height':400};
 
                 // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div_polarity'));
                 chart.draw(data, options);
             }
+
+            // Subjectivity chart
+            google.charts.setOnLoadCallback(drawChart_subjectivity);
+            function drawChart_subjectivity() {
+
+                // Create the data table.
+                // [positive, negative, neutral, objective, subjective, i, hashtag]
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'yyy');
+                data.addColumn('number', 'yyy');
+                data.addRows([
+                    ['Objective', {{ sentiments.3 }}],
+                    ['Subjective', {{ sentiments.4 }}],
+                ]);
+
+                // Set chart options
+                var options = {'width':800, 'height':400};
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div_subjectivity'));
+                chart.draw(data, options);
+            }
+
         </script>
     </head>
     <body>
 
-    <!-- NEW -->
-    <form action="/search/" method="get" class="form-inline">
-        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="q" placeholder="Search for #HashTag">
+    <!-- TÄLLÄ VOI SAADA UUDEN HAKUKENTÄN TOHON
+    <div class="input-group mb-2 mr-sm-2">
 
-        <!-- TÄLLÄ VOI SAADA UUDEN HAKUKENTÄN TOHON
-        <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text">@</div>
-            </div>
-            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+    </div>
+    -->
+
+
+
+    <!-- Search bar -->
+    <form action="/search/" method="get" class="form-inline">
+        <div class="input-group-prepend mb-2 mr-sm-0">
+            <div class="input-group-text">#</div>
         </div>
-        -->
+        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="q" placeholder="Search for tweets">
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
     </form>
 
     {% if show_content %}
         <h3>
-            <small class="text-muted"> After analysing {{ polaritys.4 }} tweets, polaritys with search word  <i><strong>{{ polaritys.3 }}</strong></i> are distributed as follow </small>
+            <small class="text-muted"> After analysing {{ sentiments.5 }} tweets, polaritys with hashtag #<i><strong>{{ sentiments.6 }}</strong></i> are distributed as follows: </small>
         </h3>
         <!--Div that will hold the pie chart-->
-        <div id="chart_div" class="mt-3"></div>
+        <div id="chart_div_polarity" class="mb-3"></div>
+        <br>
+        <h3>
+            <small class="text-muted"> The subjectivity of those {{ sentiments.5 }} tweets are distributed as follows: </small>
+        </h3>
+        <div id="chart_div_subjectivity" class="mt-3 mb-3"></div>
+
+        <br>
+        <!--The div element for the map -->
+        <h3>
+            <small class="text-muted"> The tweets were written from these locations. Notice, that from {{ sentiments.5 }} tweets only {{ locations_available }} contained the location data. </small>
+        </h3>
+        <div id="map" class="mt-1 mb-4"></div>
+        <script>
+            // Initialize and add the map
+            function initMap() {
+                // The location of Kairo
+
+                var center = {lat: 22.638223, lng: 19.221603};
+
+                // The map, centered at Uluru
+                var map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 2, center: center});
+
+                // The marker, positioned at coordinates
+                {% for i in coordinates %}
+                    var marker = new google.maps.Marker({
+                        position: {lat: {{ i.0 }}, lng: {{ i.1 }}},
+                        map: map});
+                {% endfor %}
+            }
+        </script>
+        <br>
+        <br>
+    {% else %}
+
     {% endif %}
 
-    <!-- {{ form.map }} {{ form.media.js }} -->
+
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApdG_qanGoL47UuK-xtPzaou5__7qnVxc&callback=initMap">
+    </script>
 
 
 
@@ -73,3 +152,6 @@
     </html>
 
 {% endblock %}
+
+
+

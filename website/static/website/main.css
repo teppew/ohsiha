@@ -16,6 +16,10 @@ ul {
   background-color: #5f788a;
 }
 
+.xd-grey {
+  background-color: #799bb3;
+}
+
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
 }
@@ -32,6 +36,13 @@ ul {
   background: #ffffff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+.content-section-1 {
+  background: #799bb3;
+  padding: 10px 20px;
+  border: 1px solid #799bb3;
   border-radius: 3px;
   margin-bottom: 20px;
 }
