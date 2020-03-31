@@ -25,8 +25,5 @@ def main():
     b = {'1': ['aasi', 'kissa'],
         '2': ['koira', 'kissa']
          }
-    print(len(a))
-    print(len(b))
-
 
 main()

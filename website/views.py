@@ -3,6 +3,7 @@ import tweepy, csv, sys, re
 from website import twitterAPI
 from website import  GoogleAPI
 from django.contrib.auth.decorators import login_required
+from website import credentials
 
 
 
@@ -21,6 +22,7 @@ def home(request):
                        'show_content': show_content,
                        'coordinates': coordinates,
                        'locations_available': len(coordinates),
+                       'API_KEY': credentials.API_KEY,
                        }
 
             # Takes the html file from templates folder which is inside the website project folder
