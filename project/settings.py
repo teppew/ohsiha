@@ -25,9 +25,9 @@ print(BASE_DIR)
 SECRET_KEY = '*l0yp!&sq76&)ted92)ypi_u73ru(pg$(d#87@fskpcwno9)-m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['lembergapp.herokuapp.com']
+ALLOWED_HOSTS = ['lembergapp.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
