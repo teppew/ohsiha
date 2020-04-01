@@ -21,10 +21,10 @@ print(BASE_DIR)
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*l0yp!&sq76&)ted92)ypi_u73ru(pg$(d#87@fskpcwno9)-m'
+SECRET_KEY="0402691203"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG_VALUE = True
 
 ALLOWED_HOSTS = ['lembergapp.herokuapp.com', '127.0.0.1']
 
