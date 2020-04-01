@@ -9,14 +9,14 @@ import plotly.offline as pyo
 import numpy as np
 import pandas as pd
 import pandas_highcharts.core
-from   website import credentials
+from website import credentials
 from website import locations
-
+import os
 
 def twitter_streamer(hashtag, count):
     # Twitter API credentials
-    auth = tweepy.OAuthHandler(credentials.consumer_key, credentials.consumer_secret)
-    auth.set_access_token(credentials.access_key, credentials.access_secret)
+    auth = tweepy.OAuthHandler(os.environ.get('consumer_key'), os.environ.get('consumer_secret'))
+    auth.set_access_token(os.environ.get('access_key'), os.environ.get('access_secret'))
     api = tweepy.API(auth)
 
     query = "#" + hashtag + " "

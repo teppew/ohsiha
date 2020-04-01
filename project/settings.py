@@ -25,9 +25,12 @@ print(BASE_DIR)
 SECRET_KEY = '*l0yp!&sq76&)ted92)ypi_u73ru(pg$(d#87@fskpcwno9)-m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['lembergapp.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
+
+# Herokussa jossain vaihees
+#'lembergapp.herokuapp.com', '127.0.0.1'
 
 
 # Application definition
@@ -131,13 +134,13 @@ LOGIN_REDIRECT_URL = 'website-about'
 LOGIN_URL = 'login'
 
 
-AWS_ACCESS_KEY_ID = credentials.AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY = credentials.AWS_SECRET_ACCESS_KEY
-AWS_STORAGE_BUCKET_NAME = credentials.AWS_STORAGE_BUCKET_NAME
+# AWS_ACCESS_KEY_ID = credentials.AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY = credentials.AWS_SECRET_ACCESS_KEY
+# AWS_STORAGE_BUCKET_NAME = credentials.AWS_STORAGE_BUCKET_NAME
 
-# AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 
 AWS_S3_FILE_OVERWRITE = False
