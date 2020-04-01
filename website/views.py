@@ -1,7 +1,6 @@
 from django.shortcuts import render
 import tweepy, csv, sys, re
 from website import twitterAPI
-from website import  GoogleAPI
 from django.contrib.auth.decorators import login_required
 import os
 

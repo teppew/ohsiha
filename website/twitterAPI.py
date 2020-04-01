@@ -9,7 +9,6 @@ import plotly.offline as pyo
 import numpy as np
 import pandas as pd
 import pandas_highcharts.core
-from website import credentials
 from website import locations
 import os
 
