@@ -5,8 +5,7 @@
     <h2> Twitter scraping tool!</h2>
     <br>
     <p> In this website you're able to enter a certain #hashtag, and look some interesting data about the latest 200 tweets.</p>
-    <p> In this website you're able to enter a certain #hashtag, and look some interesting data about the latest 200 tweets.</p>
-    <p> After entering a hashtag, the website will show you the following visual analyses:
+    <p> After entering a hashtag, the website will show you the following analyses in a visual way:
         <ul>
             <li> <strong>Sentiment analysis</strong> – How the positivity, negativity and neutrality has distributes </li>
             <li> <strong>Subjectivity analysis</strong> – How the objectivity and subjectivity has distributed </li>
@@ -17,7 +16,7 @@
 
     {% if user.is_authenticated %}
         <a href="{% url 'website-home' %}" style="color: black">
-            <button type="button" class="btn btn-secondary btn-md">Go to search</button>
+            <button type="button" class="btn btn-secondary btn-md">Lets try!</button>
         </a>
     {% else %}
         <a href="{% url 'login' %}" style="color: black">
