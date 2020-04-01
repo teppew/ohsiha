@@ -7,7 +7,7 @@
     <p> In this website you're able to enter a certain #hashtag, and look some interesting data about the latest 200 tweets.</p>
     <p> After entering a hashtag, the website will show you the following analyses in a visual way:
         <ul>
-            <li> <strong>Sentiment analysis</strong> – How the positivity, negativity and neutrality has distributes </li>
+            <li> <strong>Sentiment analysis</strong> – How the positivity, negativity and neutrality has distributed </li>
             <li> <strong>Subjectivity analysis</strong> – How the objectivity and subjectivity has distributed </li>
             <li> <strong>Location analysis</strong> – Where the tweets have been tweeted</li>
         </ul>
@@ -16,7 +16,7 @@
 
     {% if user.is_authenticated %}
         <a href="{% url 'website-home' %}" style="color: black">
-            <button type="button" class="btn btn-secondary btn-md">Lets try!</button>
+            <button type="button" class="btn btn-secondary btn-md">Let's try!</button>
         </a>
     {% else %}
         <a href="{% url 'login' %}" style="color: black">
