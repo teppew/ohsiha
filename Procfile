@@ -1,1 +1,1 @@
-web: gunicorn lembergapp.wsgi
+web: gunicorn project.wsgi
