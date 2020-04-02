@@ -9,6 +9,11 @@ body {
     height: 200px;
     overflow:hidden;
 }
+#chart_wrap_map {
+    position: relative;
+    height: 300px;
+    overflow:hidden;
+}
 #chart_div_subjectivity {
     position: absolute;
     top: 0;
