@@ -16,6 +16,7 @@ def home(request):
             # Sentiments = [0positive, 1negative, 2neutral, 3objective, 4subjective, 5i]
             # Allteets = [0-location, 1-username , 2-created, 3-text]
             [sentiments, coordinates] = twitterAPI.twitter_streamer(hashtag, 200)
+
             show_content = True
             context = {'sentiments': sentiments,
                        'show_content': show_content,

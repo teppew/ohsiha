@@ -17,8 +17,10 @@ def twitter_streamer(hashtag, count):
     auth = tweepy.OAuthHandler(os.environ.get('consumer_key'), os.environ.get('consumer_secret'))
     auth.set_access_token(os.environ.get('access_key'), os.environ.get('access_secret'))
     api = tweepy.API(auth)
-
-    query = "#" + hashtag + " "
+    if hashtag[0]=="#":
+        query = hashtag + " "
+    else:
+        query = "#" + hashtag + " "
     searched_tweets = [status for status in
                        tweepy.Cursor(api.search, q=query, exclude='retweets', lang="en", tweet_mode='extended').items(
                            count)]
