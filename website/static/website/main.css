@@ -6,7 +6,6 @@ body {
 
 #chart_wrap {
     position: relative;
-    padding-bottom: 0%;
     height: 0;
     overflow:hidden;
 }
