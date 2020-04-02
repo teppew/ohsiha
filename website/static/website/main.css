@@ -6,7 +6,7 @@ body {
 
 #chart_wrap {
     position: relative;
-    height: 0;
+    height: 200px;
     overflow:hidden;
 }
 #chart_div_subjectivity {
