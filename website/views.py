@@ -13,8 +13,8 @@ def home(request):
     if request.GET:
             hashtag = request.GET['q']
 
-            # Sentiments = [0positive, 1negative, 2neutral, 3objective, 4subjective, 5i]
-            # Allteets = [0-location, 1-username , 2-created, 3-text]
+            # Sentiments = [positive, negative, neutral, objective, subjective, count]
+            # Allteets = [location, username , created, text]
             [sentiments, coordinates] = twitterAPI.twitter_streamer(hashtag, 200)
 
             show_content = True
@@ -28,6 +28,7 @@ def home(request):
             # Takes the html file from templates folder which is inside the website project folder
             return render(request, 'website/home.html', context)
     else:
+        # Doesn't show to graphs because there isn't any available data
         show_content = False
         context = {'show_content': show_content}
         return render(request, 'website/home.html', context)
