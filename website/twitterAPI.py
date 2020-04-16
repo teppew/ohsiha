@@ -11,18 +11,30 @@ import pandas as pd
 import pandas_highcharts.core
 from website import locations
 import os
+import preprocessor as p
+from website import cleaner
 
 def twitter_streamer(hashtag, count):
     # Twitter API credentials
     auth = tweepy.OAuthHandler(os.environ.get('consumer_key'), os.environ.get('consumer_secret'))
     auth.set_access_token(os.environ.get('access_key'), os.environ.get('access_secret'))
     api = tweepy.API(auth)
-    if hashtag[0]=="#":
-        query = hashtag + " "
+
+    # If user enter many word, this separetas them and assumes that the first word is the wanted one.
+    hashtag = hashtag.split(" ")
+    try:
+        hashtag.remove("")
+    except:
+        pass
+    hashtag = hashtag[0]
+
+    if hashtag[0] == "#":
+        query = hashtag
     else:
-        query = "#" + hashtag + " "
+        query = "#" + hashtag
+
     searched_tweets = [status for status in
-                       tweepy.Cursor(api.search, q=query, exclude='retweets', lang="en", tweet_mode='extended').items(
+                       tweepy.Cursor(api.search, q=query, exclude='retweets', tweet_mode='extended').items(
                            count)]
 
     # Dict of lists with information about [text, created at]
@@ -34,6 +46,7 @@ def twitter_streamer(hashtag, count):
         created = tweet.created_at
         text = tweet.full_text.replace("\n", "")
         location = tweet.user.location
+
         if locations.location_verifier(location):
             location = locations.location_search(location)
             tweet_coordinates.append(location)
@@ -48,8 +61,10 @@ def twitter_streamer(hashtag, count):
     subjective = 0
     objective = 0
 
+
     for tweet in alltweet_list:
-        text = TextBlob(alltweet_list[tweet][0])
+        cleanded_tweet = cleaner.cleaner_function(alltweet_list[tweet][0])
+        text = TextBlob(cleanded_tweet)
         polarity = text.sentiment.polarity
         subjectivity = text.sentiment.subjectivity
 
@@ -67,11 +82,8 @@ def twitter_streamer(hashtag, count):
         else:
             objective += 1
 
-    sentiments = [positive, negative, neutral, objective, subjective, i-1, hashtag]
+    sentiments = [positive, negative, neutral, objective, subjective, i-1, query]
 
 
     return sentiments, tweet_coordinates
 
-#def main():
- #   twitter_streamer("corona", 20)
-#main()
